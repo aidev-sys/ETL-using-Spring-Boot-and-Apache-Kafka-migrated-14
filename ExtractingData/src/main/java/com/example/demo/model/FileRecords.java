@@ -1,30 +1,45 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.List;
 
+@Entity
+@Table(name = "file_records")
 public class FileRecords {
-	
-	private List<String> records;
-	
-	   
 
-	public FileRecords() {
-		
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public FileRecords(List<String> records) {
-		super();
-		this.records = records;
-	}
+    @Column(name = "records", columnDefinition = "jsonb")
+    private List<String> records;
 
-	public List<String> getRecords() {
-		return records;
-	}
+    public FileRecords() {
+    }
 
-	public void setRecords(List<String> records) {
-		this.records = records;
-	}
-	
-	
+    public FileRecords(List<String> records) {
+        super();
+        this.records = records;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<String> getRecords() {
+        return records;
+    }
+
+    public void setRecords(List<String> records) {
+        this.records = records;
+    }
 }
