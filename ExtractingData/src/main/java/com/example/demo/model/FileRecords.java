@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,10 +21,10 @@ public class FileRecords {
     private List<String> records;
 
     public FileRecords() {
+        this.records = new ArrayList<>();
     }
 
     public FileRecords(List<String> records) {
-        super();
         this.records = records;
     }
 
@@ -41,5 +42,39 @@ public class FileRecords {
 
     public void setRecords(List<String> records) {
         this.records = records;
+    }
+
+    // Additional utility methods required by other components
+
+    public void addRecord(String record) {
+        if (this.records == null) {
+            this.records = new ArrayList<>();
+        }
+        this.records.add(record);
+    }
+
+    public String getRecord(int index) {
+        if (this.records == null) {
+            throw new IndexOutOfBoundsException("No records available");
+        }
+        return this.records.get(index);
+    }
+
+    public void setRecord(int index, String value) {
+        if (this.records == null) {
+            throw new IndexOutOfBoundsException("No records available");
+        }
+        this.records.set(index, value);
+    }
+
+    public String removeRecord(int index) {
+        if (this.records == null) {
+            throw new IndexOutOfBoundsException("No records available");
+        }
+        return this.records.remove(index);
+    }
+
+    public int getRecordCount() {
+        return (this.records == null) ? 0 : this.records.size();
     }
 }
