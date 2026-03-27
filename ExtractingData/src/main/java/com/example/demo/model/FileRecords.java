@@ -123,6 +123,48 @@ public class FileRecords {
         return this.records != null ? new ArrayList<>(this.records) : new ArrayList<>();
     }
 
+    // Additional convenience methods to satisfy external callers
+
+    public List<String> getData() {
+        return getRecords();
+    }
+
+    public void setData(List<String> data) {
+        setRecords(data);
+    }
+
+    public void add(String record) {
+        addRecord(record);
+    }
+
+    public void addAll(Collection<String> records) {
+        addRecords(records);
+    }
+
+    public String get(int index) {
+        return getRecord(index);
+    }
+
+    public void set(int index, String value) {
+        setRecord(index, value);
+    }
+
+    public String remove(int index) {
+        return removeRecord(index);
+    }
+
+    public int count() {
+        return getRecordCount();
+    }
+
+    public void clear() {
+        clearRecords();
+    }
+
+    public boolean contains(String record) {
+        return containsRecord(record);
+    }
+
     @Override
     public String toString() {
         return "FileRecords{id=" + id + ", records=" + records + '}';
