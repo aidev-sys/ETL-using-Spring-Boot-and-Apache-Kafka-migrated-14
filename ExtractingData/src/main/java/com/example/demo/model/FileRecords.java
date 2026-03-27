@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -57,6 +58,16 @@ public class FileRecords {
         this.records.add(record);
     }
 
+    public void addRecords(Collection<String> records) {
+        if (records == null) {
+            return;
+        }
+        if (this.records == null) {
+            this.records = new ArrayList<>();
+        }
+        this.records.addAll(records);
+    }
+
     public String getRecord(int index) {
         if (this.records == null) {
             throw new IndexOutOfBoundsException("No records available");
@@ -82,6 +93,14 @@ public class FileRecords {
         return this.records != null ? this.records.size() : 0;
     }
 
+    public int size() {
+        return getRecordCount();
+    }
+
+    public boolean isEmpty() {
+        return getRecordCount() == 0;
+    }
+
     public void clearRecords() {
         if (this.records != null) {
             this.records.clear();
@@ -92,8 +111,16 @@ public class FileRecords {
         return this.records != null && this.records.contains(record);
     }
 
+    public boolean containsAll(Collection<String> records) {
+        return this.records != null && this.records.containsAll(records);
+    }
+
     public List<String> getAllRecords() {
         return this.records != null ? Collections.unmodifiableList(this.records) : Collections.emptyList();
+    }
+
+    public List<String> getRecordsCopy() {
+        return this.records != null ? new ArrayList<>(this.records) : new ArrayList<>();
     }
 
     @Override
